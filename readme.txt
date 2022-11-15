@@ -1,6 +1,6 @@
 Twitcher
 - Brenna Nettles-Miller @BrennaJoy
 - Koe Myint (@Sepchakoe)
-- Name (@username)
+- Wilson Kosasih (@WilsonHamada99)
 - Name (@username)
 
