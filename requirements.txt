@@ -4,18 +4,18 @@
 2. Logout
 3. Create New Account
 4. Delete Account
-5. User Home Page (w/messages of users they follow)
-6. Send message to followers
-7. Follow User -- Koe 
+5. User Home Page (w/messages of users they follow) -- Koe
+6. Send message to followers -- Wilson
+7. Follow User -- Koe
 8. Search for User -- Brenna
-9. User Profile -- Koe
-10. Send/Receive Messages 
+9. User Profile -- Wilson
+10. Send/Receive Messages -- Timothy
 11. Post Reactions (?)
 12. *Post Image with Message
 
 ## Non-functional Requirements
 
-1. Works on Chrome -- Brenna
+1. Works on Chrome
 2. Mobile/Desktop
 3. Localization -- Language Support
 4. Can support 3 simultaneous users
