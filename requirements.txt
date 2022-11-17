@@ -4,12 +4,12 @@
 2. Logout -- Wilson
 3. Create New Account -- Brenna
 4. Delete Account 
-5. User Home Page (w/messages of users they follow) -- Koe
-6. Send message to followers -- Wilson
-7. Follow User -- Koe
-8. Search for User -- Brenna
-9. User Profile -- Wilson
-10. Send/Receive Messages -- Timothy
+5. User Home Page (w/messages of users they follow) -- Koe w/Use Case
+6. Send message to followers -- Wilson w/Use Case
+7. Follow User -- Koe w/Use Case
+8. Search for User -- Brenna w/Use Case
+9. User Profile -- Wilson w/Use Case
+10. Send/Receive Messages -- Timothy w/Use Case
 11. Post Reactions (?) 
 12. *Post Image with Message -- Brenna
 
