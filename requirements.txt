@@ -22,31 +22,24 @@
 
 ## Use Cases
 
-1. Use Case Name (Should match functional requirement name)
-- **Pre-condition:** <can be a list or short description> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+1. Use Case Name: Send/Receive Messages
+- **Pre-condition:** The user has logged into the website.
 
-- **Trigger:** <can be a list or short description> Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. 
+- **Trigger:** The user selected another user to send messages to.
 
 - **Primary Sequence:**
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Et sequi incidunt 
-  3. Quis aute iure reprehenderit
-  4. ... 
-  5. ...
-  6. ...
-  7. ...
-  8. ...
-  9. ...
-  10. <Try to stick to a max of 10 steps>
+  1. The system opens a chat box for both the sender and receiver.
+  2. The system prompts the user to enter a message. 
+  3. The user can create a message and send it.
+  4. The system displays the message along with the namer of the sender and timestamp in the chat box. 
 
-- **Primary Postconditions:** <can be a list or short description> 
+- **Primary Postconditions:** The message is displayed for both users to see. 
 
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+- **Alternate Sequence:** The user tries to message deleted account.
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+  1. The system displays an error message to the user.
+  2. The private messaging chat box for the user is closed.
 
 - **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
   
