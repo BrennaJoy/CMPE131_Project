@@ -9,7 +9,7 @@
 7. Follow User -- Koe
 8. Search for User -- Brenna
 9. User Profile -- Wilson
-10. Send/Receive Messages
+10. Send/Receive Messages -- Timothy
 11. Post Reactions (?)
 12. *Post Image with Message
 
