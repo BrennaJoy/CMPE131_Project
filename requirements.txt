@@ -1,7 +1,7 @@
 ## Functional Requirements
 
-1. Login
-2. Logout
+1. Login -- Wilson
+2. Logout -- Wilson
 3. Create New Account
 4. Delete Account
 5. User Home Page (w/messages of users they follow)
