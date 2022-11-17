@@ -15,7 +15,7 @@
 
 ## Non-functional Requirements
 
-1. Works on Chrome -- Brenna
+1. Works on Chrome
 2. Mobile/Desktop
 3. Localization -- Language Support
 4. Can support 3 simultaneous users
