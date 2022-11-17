@@ -1,6 +1,6 @@
 ## Functional Requirements
 
-1. Login
+1. Login -- Koe
 2. Logout
 3. Create New Account
 4. Delete Account
