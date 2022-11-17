@@ -7,7 +7,7 @@
 5. User Home Page (w/messages of users they follow)
 6. Send message to followers
 7. Follow User
-8. Search for User
+8. Search for User -- Brenna
 9. User Profile
 10. Send/Receive Messages
 11. Post Reactions (?)
@@ -15,7 +15,7 @@
 
 ## Non-functional Requirements
 
-1. Works on Chrome
+1. Works on Chrome -- Brenna
 2. Mobile/Desktop
 3. Localization -- Language Support
 4. Can support 3 simultaneous users
