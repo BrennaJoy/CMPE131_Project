@@ -36,16 +36,7 @@
 
 - **Primary Postconditions:** The message is displayed for both users to see. 
 
-- **Alternate Sequence:** The user tries to message deleted account.
+- **Alternate Sequence:** The user tries to message a deleted account.
   
   1. The system displays an error message to the user.
   2. The private messaging chat box for the user is closed.
-
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
-2. Use Case Name (Should match functional requirement name)
-   ...
-
