@@ -22,37 +22,39 @@
 
 ## Use Cases
 
-1. Use Case Name (Should match functional requirement name)
-- **Pre-condition:** <can be a list or short description> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+1. Use Case Name: Search for User
+- **Pre-condition:** Must have users, actor must be logged in
 
-- **Trigger:** <can be a list or short description> Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. 
+- **Trigger:** User clicks on the "Find a User" box and types in a username.
 
 - **Primary Sequence:**
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Et sequi incidunt 
-  3. Quis aute iure reprehenderit
-  4. ... 
-  5. ...
-  6. ...
-  7. ...
-  8. ...
-  9. ...
-  10. <Try to stick to a max of 10 steps>
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. System searches through the userbase
+  5. System shows the possible usernames.
+  6. The user clicks on the profile they would like to see.
+  7.The user is taken to the aforementioned profile.
 
-- **Primary Postconditions:** <can be a list or short description> 
+- **Primary Postconditions:** User is able to view other users and go to their profiles. 
 
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+- **Alternate Sequence:** The user types in an illegal character.
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. A message appears informing the user that they entered an invalid character. 
+  5. The user is given the opportunity to enter a valid username.
 
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+- **Alternate Sequence:** The user types in a name that doesn't exist. 
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. A message appears informing the user that they entered a username that doesn't exist. 
+  5. The user is given the opportunity to enter a valid username.
+  
 2. Use Case Name (Should match functional requirement name)
    ...
 
