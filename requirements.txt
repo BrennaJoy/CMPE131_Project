@@ -21,7 +21,8 @@
 4. Can support 3 simultaneous users
 
 ## Use Cases
-
+ 
+=======
 1. Use Case Name: Search for User
 - **Pre-condition:** Must have users, actor must be logged in
 
@@ -55,6 +56,21 @@
   4. A message appears informing the user that they entered a username that doesn't exist. 
   5. The user is given the opportunity to enter a valid username.
   
-2. Use Case Name (Should match functional requirement name)
-   ...
+2. Use Case Name: Send/Receive Messages
+- **Pre-condition:** The user has logged into the website.
 
+- **Trigger:** The user selected another user to send messages to.
+
+- **Primary Sequence:**
+  
+  1. The system opens a chat box for both the sender and receiver.
+  2. The system prompts the user to enter a message. 
+  3. The user can create a message and send it.
+  4. The system displays the message along with the namer of the sender and timestamp in the chat box. 
+
+- **Primary Postconditions:** The message is displayed for both users to see.
+
+- **Alternate Sequence:** The user tries to message a deleted account.
+  
+  1. The system displays an error message to the user.
+  2. The private messaging chat box for the user is closed.
