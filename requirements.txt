@@ -38,8 +38,7 @@ Primary Sequence:
   5. User click on login
   6. User will be taken to his/her homepage
 
-Primary Postconditions: User is able to view his/her homepage with the messages 
-that user follows
+Primary Postconditions: User is able to view his/her homepage with the messages that user follows
    
 6. Use Case Name: Follow User
    
