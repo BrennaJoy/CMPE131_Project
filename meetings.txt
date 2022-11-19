@@ -2,10 +2,12 @@
 
 
 ### 2022-11-18 at 4:00PM -- Scheduled
-<meeting template would go here>
-<only fill in template once you had the meeting>
-<see example on the last date>
-<use date format YYYY-MM-DD at HH:MM>
+- Who attended the meeting -- Brenna, Koe, Wilson, Timothy
+- Team updates (15min or less)
+  -- Brenna got use case written. 
+  -- Timothy finished but still needs to push. 
+  -- Koe & Timothy will finish up use cases over the weekend. 
+ -- Brenna is team lead. 
 
 ### 2022-11-23 at 12:00PM -- Scheduled
 <meeting template would go here>
