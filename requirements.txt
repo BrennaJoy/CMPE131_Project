@@ -22,37 +22,43 @@
 
 ## Use Cases
 
-1. Use Case Name (Should match functional requirement name)
-- **Pre-condition:** <can be a list or short description> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+5. Use Case Name: User Home Page (w/messages of users they follow)
 
-- **Trigger:** <can be a list or short description> Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. 
+Pre-condition: User must have account and must be logged in 
 
-- **Primary Sequence:**
+Trigger: 
+User clicks on login 
+
+Primary Sequence:
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Et sequi incidunt 
-  3. Quis aute iure reprehenderit
-  4. ... 
-  5. ...
-  6. ...
-  7. ...
-  8. ...
-  9. ...
-  10. <Try to stick to a max of 10 steps>
+  1. User clicks on username textbox
+  2. User types username
+  3. User clicks on password textbox
+  4. User types password
+  5. User click on login
+  6. User will be taken to his/her homepage
 
-- **Primary Postconditions:** <can be a list or short description> 
+Primary Postconditions: User is able to view his/her homepage with the messages 
+that user follows
+   
+6. Use Case Name: Follow User
+   
+Pre-condition: User must have account and must be logged in 
 
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
+Trigger: 
+User clicks on "Follow" box
+
+Primary Sequence:
   
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+  1. User clicks on search box 
+  2. User types in the name to search
+  3. User clicks on search or enter button
+  4. The system shows possible usernames 
+  5. User clicks on the username that he/she wants to follow
+  6. User clicks "Follow" box
 
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
-2. Use Case Name (Should match functional requirement name)
-   ...
+Primary Postconditions: User can see other users' profiles 
+
+   
+   
 
