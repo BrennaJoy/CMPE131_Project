@@ -46,3 +46,55 @@ The user change the profile picture
 The system will show a warning message “the image size is bigger than 10 MB”
 The user select another picture
 =======
+=======
+1. Use Case Name: Search for User
+- **Pre-condition:** Must have users, actor must be logged in
+
+- **Trigger:** User clicks on the "Find a User" box and types in a username.
+
+- **Primary Sequence:**
+  
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. System searches through the userbase
+  5. System shows the possible usernames.
+  6. The user clicks on the profile they would like to see.
+  7.The user is taken to the aforementioned profile.
+
+- **Primary Postconditions:** User is able to view other users and go to their profiles. 
+
+- **Alternate Sequence:** The user types in an illegal character.
+  
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. A message appears informing the user that they entered an invalid character. 
+  5. The user is given the opportunity to enter a valid username.
+
+- **Alternate Sequence:** The user types in a name that doesn't exist. 
+  
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. A message appears informing the user that they entered a username that doesn't exist. 
+  5. The user is given the opportunity to enter a valid username.
+  
+2. Use Case Name: Send/Receive Messages
+- **Pre-condition:** The user has logged into the website.
+
+- **Trigger:** The user selected another user to send messages to.
+
+- **Primary Sequence:**
+  
+  1. The system opens a chat box for both the sender and receiver.
+  2. The system prompts the user to enter a message. 
+  3. The user can create a message and send it.
+  4. The system displays the message along with the namer of the sender and timestamp in the chat box. 
+
+- **Primary Postconditions:** The message is displayed for both users to see.
+
+- **Alternate Sequence:** The user tries to message a deleted account.
+  
+  1. The system displays an error message to the user.
+  2. The private messaging chat box for the user is closed.
