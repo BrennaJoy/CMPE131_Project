@@ -1,17 +1,17 @@
 ## Functional Requirements
 
-1. Login
-2. Logout
-3. Create New Account
-4. Delete Account
-5. User Home Page (w/messages of users they follow) -- Koe
-6. Send message to followers -- Wilson
-7. Follow User -- Koe
-8. Search for User -- Brenna
-9. User Profile -- Wilson
-10. Send/Receive Messages -- Timothy
-11. Post Reactions (?)
-12. *Post Image with Message
+1. Login -- Koe
+2. Logout -- Wilson
+3. Create New Account -- Brenna
+4. Delete Account -- Timothy 
+5. User Home Page (w/messages of users they follow) -- Koe w/Use Case
+6. Send message to followers -- Wilson w/Use Case
+7. Follow User -- Koe w/Use Case
+8. Search for User -- Brenna w/Use Case
+9. User Profile -- Wilson w/Use Case
+10. Send/Receive Messages -- Timothy w/Use Case
+11. Post Reactions (?) -- Timothy
+12. *Post Image with Message -- Brenna
 
 ## Non-functional Requirements
 
@@ -21,8 +21,42 @@
 4. Can support 3 simultaneous users
 
 ## Use Cases
+ 
+=======
+1. Use Case Name: Search for User
+- **Pre-condition:** Must have users, actor must be logged in
 
-1. Use Case Name: Send/Receive Messages
+- **Trigger:** User clicks on the "Find a User" box and types in a username.
+
+- **Primary Sequence:**
+  
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. System searches through the userbase
+  5. System shows the possible usernames.
+  6. The user clicks on the profile they would like to see.
+  7.The user is taken to the aforementioned profile.
+
+- **Primary Postconditions:** User is able to view other users and go to their profiles. 
+
+- **Alternate Sequence:** The user types in an illegal character.
+  
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. A message appears informing the user that they entered an invalid character. 
+  5. The user is given the opportunity to enter a valid username.
+
+- **Alternate Sequence:** The user types in a name that doesn't exist. 
+  
+  1. User clicks on the search textbox.
+  2. User types in the name to search. 
+  3. User clicks the search/enter button.
+  4. A message appears informing the user that they entered a username that doesn't exist. 
+  5. The user is given the opportunity to enter a valid username.
+  
+2. Use Case Name: Send/Receive Messages
 - **Pre-condition:** The user has logged into the website.
 
 - **Trigger:** The user selected another user to send messages to.
@@ -34,7 +68,7 @@
   3. The user can create a message and send it.
   4. The system displays the message along with the namer of the sender and timestamp in the chat box. 
 
-- **Primary Postconditions:** The message is displayed for both users to see. 
+- **Primary Postconditions:** The message is displayed for both users to see.
 
 - **Alternate Sequence:** The user tries to message a deleted account.
   
