@@ -21,38 +21,49 @@
 4. Can support 3 simultaneous users
 
 ## Use Cases
+1. Use case name: Send message to followers
 
-1. Use Case Name (Should match functional requirement name)
-- **Pre-condition:** <can be a list or short description> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+Pre condition: must have followers and the user must be logged in
 
-- **Trigger:** <can be a list or short description> Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. 
+Triggers: Users must click on the message symbol
 
-- **Primary Sequence:**
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Et sequi incidunt 
-  3. Quis aute iure reprehenderit
-  4. ... 
-  5. ...
-  6. ...
-  7. ...
-  8. ...
-  9. ...
-  10. <Try to stick to a max of 10 steps>
+Primary sequence:
+The user click on the “post message” box
+The user types the message
+The user press enter or click “post
+The system shows the message on the homepage
 
-- **Primary Postconditions:** <can be a list or short description> 
+Primary postconditions: Users and the followers are able to see the message or status
 
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
+Alternate sequence: the user only type punctuations
+The user click on the “post message” box
+The user types only puncutations on the message
+The system will show a warning message “the message should contains at least one alphabet or number”
+The user retype the message
+The user press enter or click “post
+The system shows the message on the homepage
 
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
-2. Use Case Name (Should match functional requirement name)
-   ...
+2. Use case name: Edit user profile
 
+Pre condition: the user must have an account and logged in
+
+Triggers:
+The user click on the profile box and click edit
+The user will go to settings and find edit profile
+
+Primary sequence:
+The user click on the edit profile picture
+The user change the profile picture or delete the profile picture
+The user click “finish edit”
+The user click on the edit bio
+The user types text on bio
+The user click “finish edit”
+The system will show the edited profile picture and bio
+
+Primary postconditions: the user can update the profile picture and/or bio
+
+Alternate sequence: the picture size is too big
+The user click on the edit profile picture
+The user change the profile picture
+The system will show a warning message “the image size is bigger than 10 MB”
+The user select another picture
