@@ -1,25 +1,3 @@
-## Functional Requirements
-
-1. Login
-2. Logout
-3. Create New Account
-4. Delete Account
-5. User Home Page (w/messages of users they follow)
-6. Send message to followers -- Wilson
-7. Follow User
-8. Search for User -- Brenna
-9. User Profile -- Wilson
-10. Send/Receive Messages
-11. Post Reactions (?)
-12. *Post Image with Message
-
-## Non-functional Requirements
-
-1. Works on Chrome -- Brenna
-2. Mobile/Desktop
-3. Localization -- Language Support
-4. Can support 3 simultaneous users
-
 ## Use Cases
 1. Use case name: Send message to followers
 
@@ -67,3 +45,4 @@ The user click on the edit profile picture
 The user change the profile picture
 The system will show a warning message “the image size is bigger than 10 MB”
 The user select another picture
+=======
