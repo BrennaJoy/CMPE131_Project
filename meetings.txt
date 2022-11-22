@@ -7,8 +7,8 @@
   -- Brenna got use case written. 
   -- Timothy finished but still needs to push. 
   -- Koe & Timothy will finish up use cases over the weekend. 
- -- Brenna is team lead. 
- -- Talked about use cases and our plan moving forward. Also about 
+  -- Brenna is team lead. 
+  -- Talked about use cases and our plan moving forward. Also about 
     who would be submitting first milestone & when we would start coding.
 
 ### 2022-11-23 at 2:00PM -- Scheduled
