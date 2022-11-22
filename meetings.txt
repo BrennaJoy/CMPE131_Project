@@ -11,7 +11,7 @@
  -- Talked about use cases and our plan moving forward. Also about 
     who would be submitting first milestone & when we would start coding.
 
-### 2022-11-23 at 12:00PM -- Scheduled
+### 2022-11-23 at 2:00PM -- Scheduled
 <meeting template would go here>
 <only fill in template once you had the meeting>
 
