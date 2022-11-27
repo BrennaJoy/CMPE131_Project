@@ -1,4 +1,7 @@
 from bWork import myapp_obj
+import sys
+sys.path.append('bWork')
+from users import add_new_user
 from flask import render_template, redirect, flash
 from bWork.forms import LoginForm, CreateUserForm
 
@@ -21,9 +24,10 @@ def login():
 def signUp():
 	current_form = CreateUserForm()
 	if current_form.validate_on_submit():
-		flash('Welcome to Twitcher!')
 		print(current_form.username.data, current_form.password.data, current_form.name.data,
 			current_form.email.data)
+		if add_new_user(current_form.name.data, current_form.username.data, current_form.password.data, current_form.email.data):
+			flash('Welcome to Twitcher!')
 		return redirect('/')
 	if current_form.username.data == "" or current_form.password.data == "" or current_form.name.data == "" or current_form.email.data == "":
 		flash('Please Enter All Criteria')
