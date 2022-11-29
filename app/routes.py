@@ -1,9 +1,9 @@
-from bWork import myapp_obj
+from app import myapp_obj
 import sys
-sys.path.append('bWork')
+sys.path.append('app')
 from users import add_new_user, search_for_user
 from flask import render_template, redirect, flash
-from bWork.forms import LoginForm, CreateUserForm, SearchForm
+from app.forms import LoginForm, CreateUserForm, SearchForm
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
 def login():
@@ -46,5 +46,7 @@ def search():
 
 @myapp_obj.route('/')
 def home():
-    return render_template('base.html')
+	flash('Welcome to the Wonderful World of Twitcher')
+	flash('This is a placeholder')
+	return render_template('base.html')
 

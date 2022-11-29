@@ -6,4 +6,4 @@ myapp_obj.config.update(
     SECRET_KEY='this-is-a-secret'
 )
 
-from bWork import routes
+from app import routes
