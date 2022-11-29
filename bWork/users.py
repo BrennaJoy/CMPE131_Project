@@ -32,6 +32,4 @@ def search_for_user(username):
 	user_object = user_dictionary.get(username)
 	if user_object is None:
 		flash('No username found')
-	elif username.isalnum() is False:
-		flash('Please use alphanumeric characters')
 	return user_object
