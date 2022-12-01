@@ -9,6 +9,7 @@ myapp_obj.config.update(
 
 socketio = SocketIO(myapp_obj)
 
+
 from app import routes
 
 from app import chat

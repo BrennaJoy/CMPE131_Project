@@ -8,20 +8,19 @@
 
 <p>Send a message! {{name}} </p>
 
-<form action="" method="POST" novalidate>
-  <input type="text" id="msg" value="Hello, everyone!"><br>
-  <button id="send">Send</button>
-</form>
+
+<input type="text" id="msg" value="Hello, everyone!"><br>
+<button id="send">Send</button>
+
 
 <script>
 
-    $(document).ready(function()) {
+    $(document).ready(function() {
         var socket = io.connect('http://' + document.domain + ':' + location.port);
 
         // User join message
         socket.on('connect', function() {
-            socket.emit('join', {}); 
-        };
+        });
 
         // Display message on page
         socket.on('message', function(data) {
@@ -29,12 +28,11 @@
         });
 
         // Send message on click
-        $('send').on('click', function()) {
-            socket.emit('Temporary Name: ' + $('#message').val());
-           // socket.emit($('#username').val() + ': ' + $('#message').val());
+        $('#send').on('click', function() {
+            socket.send('Temporary Name: ' + $('#msg').val());
             $('message').val('');
-        };
-    }
+        });
+    })
 
 </script>
 
