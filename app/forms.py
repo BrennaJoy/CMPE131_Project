@@ -7,3 +7,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember me')
     submit = SubmitField('Sign In')
+
+class SendMessage(FlaskForm):
+    message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=50)])
+    submit = SubmitField('Send')
