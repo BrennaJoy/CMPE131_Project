@@ -1,6 +1,6 @@
 from app import myapp_obj
 from flask import render_template, redirect, flash
-from app.forms import LoginForm
+from app.forms import LoginForm, SendMessage
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
 def login():
@@ -21,3 +21,12 @@ def login():
 @myapp_obj.route('/')
 def home():
     return render_template('base.html')
+
+@myapp_obj.route('/send', methods=['POST', 'GET'])
+def send():
+    current_form = SendMessage()
+    if current_form.validate_on_submit():
+        flash('Message Sent: ' + current_form.message.data)
+        print(current_form.message.data)
+        return redirect('/send')
+    return render_template('send.html', form=current_form)
