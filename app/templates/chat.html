@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block mycontent %}
+<title>Chat Room</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+
+<p>Send a message! {{name}} </p>
+
+<form action="" method="POST" novalidate>
+  <input type="text" id="msg" value="Hello, everyone!"><br>
+  <button id="send">Send</button>
+</form>
+
+<script>
+
+    $(document).ready(function()) {
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        // User join message
+        socket.on('connect', function() {
+            socket.emit('join', {}); 
+        };
+
+        // Display message on page
+        socket.on('message', function(data) {
+            $('#messages').append($('<p>').text(data));
+        });
+
+        // Send message on click
+        $('send').on('click', function()) {
+            socket.emit('Temporary Name: ' + $('#message').val());
+           // socket.emit($('#username').val() + ': ' + $('#message').val());
+            $('message').val('');
+        };
+    }
+
+</script>
+
+{% endblock %}
