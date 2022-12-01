@@ -21,7 +21,3 @@ def login():
 @myapp_obj.route('/')
 def home():
     return render_template('base.html')
-
-@myapp_obj.route('/chat')
-def chat():
-    return render_template('chat.html')
