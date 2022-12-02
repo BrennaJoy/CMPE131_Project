@@ -3,7 +3,7 @@ import sys
 sys.path.append('app')
 from users import add_new_user, search_for_user
 from flask import render_template, redirect, flash
-from app.forms import LoginForm, CreateUserForm, SearchForm
+from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
 def login():
@@ -49,4 +49,12 @@ def home():
 	flash('Welcome to the Wonderful World of Twitcher')
 	flash('This is a placeholder')
 	return render_template('base.html')
+
+@myapp_obj.route('/send', methods=['POST', 'GET'])
+def send():
+    current_form = SendMessage()
+    if current_form.validate_on_submit():
+        flash('Message Sent: ' + current_form.message.data)
+        print(current_form.message.data)
+    return render_template('send.html', form=current_form)
 

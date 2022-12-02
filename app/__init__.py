@@ -7,3 +7,4 @@ myapp_obj.config.update(
 )
 
 from app import routes
+
