@@ -28,5 +28,4 @@ def send():
     if current_form.validate_on_submit():
         flash('Message Sent: ' + current_form.message.data)
         print(current_form.message.data)
-        return redirect('/send')
     return render_template('send.html', form=current_form)
