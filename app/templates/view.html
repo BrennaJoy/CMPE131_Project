@@ -7,6 +7,8 @@
     <h1><b>Your messages: </b></h1>
 </head>
 
+<div class = "box">
+
 <body>
     {% for m in msg %}
         <b>{{ m[0] + ': ' }}</b>
@@ -14,6 +16,17 @@
         <br></br>
     {% endfor %}
 </body>
+
+</div>
+
+<style>
+.box {
+  display: inline-block;
+  width: 200px;
+  height: 1000px;
+  background-color: lightskyblue;
+}
+</style>
 
 {% endblock %}
 

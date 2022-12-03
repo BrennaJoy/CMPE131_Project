@@ -52,18 +52,25 @@ def home():
 
 @myapp_obj.route('/send', methods=['POST', 'GET'])
 def send():
+    # SendMessage form
     current_form = SendMessage()
+    # On form submission, check if the receiever user exist, otherwise prompt the sender to enter the correct username.
     if current_form.validate_on_submit():
         if (search_for_user(current_form.receiver.data) == False):
             flash('Please make sure you entered the correct username.')
+        # Search for a user and add the sender's message to their messages list.
         else:
             receiver_user = search_for_user(current_form.receiver.data)
-            receiver_user.add_message('Test Name', current_form.message.data)          
-            print(current_form.message.data)
+            receiver_user.add_message('Test Name', current_form.message.data) # Test Name is temporary, will replace with sender username.         
+            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
     return render_template('send.html', form=current_form)
 
 @myapp_obj.route('/view')
 def view():
-    user_messages = search_for_user("JohnDoe").messages
+    # If User does not exist, redirect to home page.
+    if (search_for_user("JohnDoe") == False): # JohnDoe is temporary will replace with username.
+        return redirect('/')
+    # Send the user's messages list to template
+    user_messages = search_for_user("JohnDoe").messages # JohnDoe is temporary will replace with username.
     return render_template('view.html', msg=user_messages)
 

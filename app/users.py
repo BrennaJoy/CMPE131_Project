@@ -17,9 +17,10 @@ class User:
 		# Make sure that login page uses hashlib.md5(password.encode()) to
 		# hash the passwords. Will compare to the same hash.
 
+	# Append a tuple containing (name of sender, message they send) to this user's messages list.
 	def add_message(self, sender, message):
 		self.messages.append((sender, message))
-		
+
 
 def add_new_user(name, username, password, email):
 	if username not in user_dictionary.keys():
