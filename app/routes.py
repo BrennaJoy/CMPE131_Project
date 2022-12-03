@@ -46,9 +46,7 @@ def search():
 
 @myapp_obj.route('/')
 def home():
-	flash('Welcome to the Wonderful World of Twitcher')
-	flash('This is a placeholder')
-	return render_template('base.html')
+	return render_template('login.html')
 
 @myapp_obj.route('/send', methods=['POST', 'GET'])
 def send():
