@@ -6,7 +6,9 @@
 
 <form action="" method="POST" novalidate>
     {{form.hidden_tag()}}
+    <p>{{form.receiver.label}} <br> {{form.receiver()}}</p>
     <p>{{form.message.label}} <br> {{form.message()}}</p>
     <p>{{form.submit.label}} <br> {{form.submit()}}</p>
 </form>
+
 {% endblock %}

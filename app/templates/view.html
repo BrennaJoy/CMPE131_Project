@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block mycontent %}
+
+<head>
+    <title>View Messages</title>
+    <h1><b>Your messages: </b></h1>
+</head>
+
+<body>
+    {% for m in msg %}
+        <b>{{ m[0] + ': ' }}</b>
+        {{ m[1] }}
+        <br></br>
+    {% endfor %}
+</body>
+
+{% endblock %}
+
+
+
