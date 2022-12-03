@@ -21,6 +21,7 @@ class SearchForm(FlaskForm):
 	submit = SubmitField('Search')
 
 class SendMessage(FlaskForm):
+    receiver = StringField('Send to:', validators = [DataRequired()])
     message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=50)])
     submit = SubmitField('Send')
 
