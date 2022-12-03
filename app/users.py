@@ -4,6 +4,9 @@ import hashlib
 user_dictionary = {}
 
 class User:
+
+	messages = []
+
 	def __init__(self, name, username, password, email):
 		self.post_history = None
 
@@ -13,6 +16,10 @@ class User:
 		self.hashed_password = hashlib.md5(password.encode())
 		# Make sure that login page uses hashlib.md5(password.encode()) to
 		# hash the passwords. Will compare to the same hash.
+
+	def add_message(self, sender, message):
+		self.messages.append((sender, message))
+		
 
 def add_new_user(name, username, password, email):
 	if username not in user_dictionary.keys():
@@ -32,4 +39,6 @@ def search_for_user(username):
 	user_object = user_dictionary.get(username)
 	if user_object is None:
 		flash('No username found')
+		return False 
 	return user_object
+
