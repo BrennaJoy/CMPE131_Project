@@ -4,6 +4,7 @@ sys.path.append('app')
 from users import add_new_user, search_for_user
 from flask import render_template, redirect, flash
 from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage
+import datetime 
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
 def login():
@@ -65,8 +66,9 @@ def send():
         # Search for a user and add the sender's message to their messages list.
         else:
             receiver_user = search_for_user(current_form.receiver.data)
-            receiver_user.add_message('Test Name', current_form.message.data) # Test Name is temporary, will replace with sender username.         
-            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
+            time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
+            receiver_user.add_message(' ' + time + 'Test Name' +': ', current_form.message.data) # Test Name is temporary, will replace with sender username.         
+            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data) 
     return render_template('send.html', form=current_form, msg=user_messages)
 
 
