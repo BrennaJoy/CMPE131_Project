@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block mycontent %}
-<h1>{{a}}</h1>
+
+<head>
 <title>Send a message to the user</title>
+<h1><b>Send message: </b></h1>
+</head>
 
 <form action="" method="POST" novalidate>
     {{form.hidden_tag()}}
@@ -10,5 +13,47 @@
     <p>{{form.message.label}} <br> {{form.message()}}</p>
     <p>{{form.submit.label}} <br> {{form.submit()}}</p>
 </form>
+
+
+<div class = "messagetitle">
+
+<head>
+    <title>View Messages</title>
+    <h1><b>Your messages: </b></h1>
+</head>
+
+</div>
+
+<div class = "box">
+
+<body>
+    {% for m in msg %}
+        <b>{{ m[0] + ': ' }}</b>
+        {{ m[1] }}
+        <br></br>
+    {% endfor %}
+</body>
+
+</div>
+
+<style>
+.box {
+  display: inline-block;
+  width: 500px;
+  height: 1000px;
+  background-color: lightskyblue;
+  position: relative;
+  left: 500px;
+  top: -250px;
+
+}
+
+.messagetitle {
+  position: relative;
+  left: 500px;
+  top: -250px;
+}
+</style>
+
 
 {% endblock %}
