@@ -54,7 +54,16 @@ def home():
 def send():
     current_form = SendMessage()
     if current_form.validate_on_submit():
-        flash('Message Sent: ' + current_form.message.data)
-        print(current_form.message.data)
+        if (search_for_user(current_form.receiver.data) == False):
+            flash('Please make sure you entered the correct username.')
+        else:
+            receiver_user = search_for_user(current_form.receiver.data)
+            receiver_user.add_message('Test Name', current_form.message.data)          
+            print(current_form.message.data)
     return render_template('send.html', form=current_form)
+
+@myapp_obj.route('/view')
+def view():
+    user_messages = search_for_user("JohnDoe").messages
+    return render_template('view.html', msg=user_messages)
 
