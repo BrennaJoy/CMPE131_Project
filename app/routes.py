@@ -57,11 +57,11 @@ def send():
     current_form = SendMessage()
     user_messages = []
     # Check if the user exists and send the user's messages list to the template to display it.
-    if (search_for_user("JohnDoe") != False):
+    if (search_for_user("JohnDoe") != None):
         user_messages = search_for_user("JohnDoe").messages # JohnDoe is temporary.
     # On form submission, check if the receiever user exist, otherwise prompt the sender to enter the correct username.
     if current_form.validate_on_submit():
-        if (search_for_user(current_form.receiver.data) == False):
+        if (search_for_user(current_form.receiver.data) == None):
             flash('Please make sure you entered the correct username.')
         # Search for a user and add the sender's message to their messages list.
         else:

@@ -40,6 +40,5 @@ def search_for_user(username):
 	user_object = user_dictionary.get(username)
 	if user_object is None:
 		flash('No username found')
-		return False 
 	return user_object
 
