@@ -48,6 +48,10 @@ def search():
 def home():
 	return render_template('login.html')
 
+@myapp_obj.route('/homepage')
+def homepage():
+	return render_template('homepage.html')
+
 @myapp_obj.route('/send', methods=['POST', 'GET'])
 def send():
     current_form = SendMessage()
