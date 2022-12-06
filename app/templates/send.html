@@ -24,8 +24,19 @@
 <div class = "box">
 <body>
     {% for m in msg %}
-        <b>{{ m[0]}}</b>
-        {{ m[1] }}
+        <b>{{ m[0]}}
+        {{ m[1] }} </b>
+        {{ m[2] }}
+        <form action="{{ url_for('processreaction1', sender=m[1], message=m[2]) }}" method="POST">
+        <input type="hidden" name="sender" value="{{ m[1] }}" />
+        <input type="hidden" name="message" value="{{ m[2] }}" />
+        <input type="submit" value="👍"/>
+        </form>
+        <form action="{{ url_for('processreaction2', sender=m[1], message=m[2]) }}" method="POST">
+        <input type="hidden" name="sender" value="{{ m[1] }}" />
+        <input type="hidden" name="message" value="{{ m[2] }}" />
+        <input type="submit" value="👎"/>
+        </form>
         <br></br>
     {% endfor %}
 </body>
@@ -40,6 +51,7 @@
   position: fixed;
   left: 500px;
   top: 100px;
+  overflow:  scroll;
 }
 
 .messagetitle {
@@ -47,6 +59,7 @@
   left: 500px;
   top: 0px;
 }
+
 </style>
 
 

@@ -2,7 +2,7 @@ from app import myapp_obj
 import sys
 sys.path.append('app')
 from users import add_new_user, search_for_user, remove_user
-from flask import render_template, redirect, flash
+from flask import render_template, redirect, flash, request
 from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage, DeleteConfirm
 import datetime 
 
@@ -51,6 +51,10 @@ def home():
 	flash('This is a placeholder')
 	return render_template('base.html')
 
+# Private messaging form, allows user to send message to another user. This page also displays any messages 
+# that this current user has received. 
+# IMPORTANT: As of now, there is no way to verify current logged in user, so the only way to view sent messages
+# is to send messages to 'JohnDoe', this also means that the JohnDoe account has to be created in the database first.
 @myapp_obj.route('/send', methods=['POST', 'GET'])
 def send():
     # SendMessage form
@@ -67,20 +71,56 @@ def send():
         else:
             receiver_user = search_for_user(current_form.receiver.data)
             time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
-            receiver_user.add_message(' ' + time + 'Test Name' +': ', current_form.message.data) # Test Name is temporary, will replace with sender username.         
+            # Sender name 'JohnDoe' is temporary, will replace with sender username.
+            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data)          
             flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data) 
     return render_template('send.html', form=current_form, msg=user_messages)
 
+# Account deletion confirmation page, delete user from database if they submit the form.
 @myapp_obj.route('/deleteconfirm', methods=['POST', 'GET'])
 def deleteconfirm():
     current_form = DeleteConfirm()
     # Remove user from database if confirm button is clicked.
     if current_form.validate_on_submit():
+        name = current_form.username.data
         # JohnDoe is temporary, will replace with a way to get the currently logged in user.
-        remove_user("JohnDoe")
+        remove_user(name)
         # Redirect to homepage after account deletion.
         return redirect("/")
     return render_template('deleteconfirm.html', form = current_form)
+
+# When user presses a 'reaction' button on a message from /send, this route will process the reaction 
+# and send the reaction as a message to the other user. Send thumbs up emoji.
+@myapp_obj.route('/processreaction1', methods=['POST'])
+def processreaction1():
+    sender = request.form['sender']
+    message = request.form['message']
+
+    if (search_for_user(sender) == None):
+        return redirect('/send')
+    else:
+        time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
+        receiver_user = search_for_user(sender)
+        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👍")                            
+        return redirect('/send')
+
+
+# When user presses a 'reaction' button on a message from /send, this route will process the reaction 
+# and send the reaction as a message to the other user. Send thumbs down emoji.
+@myapp_obj.route('/processreaction2', methods=['POST'])
+def processreaction2():
+    sender = request.form['sender']
+    message = request.form['message']
+
+    if (search_for_user(sender) == None):
+        return redirect('/send')
+    else:
+        time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
+        receiver_user = search_for_user(sender)
+        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎")                            
+        return redirect('/send')
+
+
 
 
 

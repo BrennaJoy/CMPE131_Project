@@ -18,8 +18,8 @@ class User:
 		# hash the passwords. Will compare to the same hash.
 
 	# Append a tuple containing (name of sender, message they send) to this user's messages list.
-	def add_message(self, sender, message):
-		self.messages.append((sender, message))
+	def add_message(self, timestamp, sender, message):
+		self.messages.append((timestamp, sender, message))
 
 
 def add_new_user(name, username, password, email):
