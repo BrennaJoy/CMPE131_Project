@@ -42,3 +42,14 @@ def search_for_user(username):
 		flash('No username found')
 	return user_object
 
+def remove_user(username):
+	# Check if user exists in database before removing them from it.
+	# Will also need to check if they are currently logged in.
+	if (user_dictionary.get(username) != None):
+		name = user_dictionary.get(username).username
+		user_dictionary.pop(username)
+		print(name + ' has been deleted.')
+	else:
+		flash('User does not exist.')
+
+

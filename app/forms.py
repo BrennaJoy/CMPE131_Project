@@ -25,3 +25,6 @@ class SendMessage(FlaskForm):
     message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=150)])
     submit = SubmitField('Send')
 
+class DeleteConfirm(FlaskForm):
+    submit = SubmitField('Confirm')
+

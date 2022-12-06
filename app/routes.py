@@ -1,9 +1,9 @@
 from app import myapp_obj
 import sys
 sys.path.append('app')
-from users import add_new_user, search_for_user
+from users import add_new_user, search_for_user, remove_user
 from flask import render_template, redirect, flash
-from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage
+from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage, DeleteConfirm
 import datetime 
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
@@ -70,5 +70,17 @@ def send():
             receiver_user.add_message(' ' + time + 'Test Name' +': ', current_form.message.data) # Test Name is temporary, will replace with sender username.         
             flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data) 
     return render_template('send.html', form=current_form, msg=user_messages)
+
+@myapp_obj.route('/deleteconfirm', methods=['POST', 'GET'])
+def deleteconfirm():
+    current_form = DeleteConfirm()
+    # Remove user from database if confirm button is clicked.
+    if current_form.validate_on_submit():
+        # JohnDoe is temporary, will replace with a way to get the currently logged in user.
+        remove_user("JohnDoe")
+        # Redirect to homepage after account deletion.
+        return redirect("/")
+    return render_template('deleteconfirm.html', form = current_form)
+
 
 
