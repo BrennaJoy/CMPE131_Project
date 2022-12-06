@@ -54,7 +54,8 @@ def home():
 # Private messaging form, allows user to send message to another user. This page also displays any messages 
 # that this current user has received. 
 # IMPORTANT: As of now, there is no way to verify current logged in user, so the only way to view sent messages
-# is to send messages to 'JohnDoe', this also means that the JohnDoe account has to be created in the database first.
+# is to send messages to 'JohnDoe', this also means that an account with the username 'JohnDoe' has to be created 
+# and added to the database first. 
 @myapp_obj.route('/send', methods=['POST', 'GET'])
 def send():
     # SendMessage form
