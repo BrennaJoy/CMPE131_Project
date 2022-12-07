@@ -4,8 +4,25 @@
 <style>
   .center h1{
     text-align: center;
-    color: #954eb0;
-    padding: 0 0 25px 0;
+    color: rgb(140, 58, 173);
+}
+ 
+ nav {
+	padding: 10px;
+	text-align: left;
+}
+
+nav a{
+	text-decoration: none;
+	color: purple;
+	padding: 13px;
+	letter-spacing: .03em;
+}
+
+nav a:hover {
+	color: rgb(155, 216, 239);
+	background-color: rgb(204, 129, 204);
+  border-radius: 10px;
 }
 </style>
 
@@ -22,22 +39,12 @@
 <div class="center">
   <h1>Welcome to Twitcher</h1>
   <nav class="navbar navbar-expand-lg bg-gradient">
-    <div class="container-fluid">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('send')}}">Send Message</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('search')}}">Search User</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">Log out</a>
-        </li>
-      </ul>
+  <div id="container">
+      <nav>
+        <a href="{{url_for('send')}}">Send Message</a>
+        <a href="{{url_for('search')}}">Search User</a>
+        <a href="#">Log out</a>
+      </nav>
     </div>
-  </div>
-</nav>
 {% endblock %}
   
