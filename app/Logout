@@ -1,4 +1,4 @@
-@app.route('/logout')
+@myapp_obj.route('/logout')
 def logout():
 	session.pop('email', None)
 	return redirect('/')
