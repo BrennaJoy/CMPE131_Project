@@ -21,6 +21,10 @@ class SearchForm(FlaskForm):
 	submit = SubmitField('Search')
 
 class SendMessage(FlaskForm):
-    message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=50)])
+    receiver = StringField('Send to:', validators = [DataRequired()])
+    message = TextAreaField('Message', validators=[DataRequired(), Length(min=0, max=150)])
     submit = SubmitField('Send')
 
+class DeleteConfirm(FlaskForm):
+    username = StringField('Username:', validators = [DataRequired()])
+    submit = SubmitField('Confirm')
