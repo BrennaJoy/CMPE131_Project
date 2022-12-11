@@ -1,26 +1,37 @@
+from flask_login import login_user, logout_user, user_logged_in, login_required
 from app import myapp_obj
 import sys
+from app.models import User
 sys.path.append('app')
 from users import add_new_user, search_for_user, remove_user
-from flask import render_template, redirect, flash, request
+from flask import render_template, redirect, flash, request, url_for
 from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage, DeleteConfirm
 import datetime 
+
+@myapp_obj.route('/')
+def home():
+    return render_template('base.html')
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
 def login():
     current_form = LoginForm()
     # taking input from the user and doing somithing with it
     if current_form.validate_on_submit():
-        flash('quick way to debug')
-        flash('another quick way to debug')
-        print(current_form.username.data, current_form.password.data)
-        return redirect('/')
-    if current_form.username.data == "" or current_form.password.data == "":
-        flash('ERROR: Empty input')
-    a = 1
-    name = 'Carlos'
-    return render_template('login.html', name=name, a=a, form=current_form)
+        # search to make sure we have the user in our database
+        user = User.query.filter_by(username=current_form.username.data).first()
 
+        # check user's password with what is saved on the database
+        if user is None or not user.check_password(current_form.password.data):
+            flash('Invalid password!')
+            # if passwords don't match, send user to login again
+            return redirect('/login')
+
+        # login user
+        login_user(user, remember=current_form.remember_me.data)
+        print(current_form.username.data, current_form.password.data)
+        return redirect('/homepage')
+
+    return render_template('login.html', form=current_form)
 @myapp_obj.route('/SignUp', methods=['POST', 'GET'])
 def signUp():
 	current_form = CreateUserForm()
@@ -29,13 +40,14 @@ def signUp():
 			current_form.email.data)
 		#Remove print statement later. For debugging purposes
 		if add_new_user(current_form.name.data, current_form.username.data, current_form.password.data, current_form.email.data):
-			flash('Welcome to Twitcher!')
-		return redirect('/')
+			flash('Welcome!')
+		return redirect('/login')
 	if current_form.username.data == "" or current_form.password.data == "" or current_form.name.data == "" or current_form.email.data == "":
 		flash('Please Enter All Criteria')
 	return render_template('signup.html', form=current_form)
 
 @myapp_obj.route('/search', methods=['POST', 'GET'])
+@login_required 
 def search():
 	current_form = SearchForm()
 	if current_form.validate_on_submit():
@@ -45,11 +57,8 @@ def search():
 		#flash is placeholder. shows up regardless of if username is good
 	return render_template('search.html', form=current_form)
 
-@myapp_obj.route('/')
-def home():
-	return render_template('login.html')
-
 @myapp_obj.route('/homepage')
+@login_required
 def homepage():
 	return render_template('homepage.html')
 
@@ -59,6 +68,7 @@ def homepage():
 # is to send messages to 'JohnDoe', this also means that an account with the username 'JohnDoe' has to be created 
 # and added to the database first. 
 @myapp_obj.route('/send', methods=['POST', 'GET'])
+@login_required
 def send():
     # SendMessage form
     current_form = SendMessage()
@@ -95,6 +105,7 @@ def deleteconfirm():
 # When user presses a 'reaction' button on a message from /send, this route will process the reaction 
 # and send the reaction as a message to the other user. Send thumbs up emoji.
 @myapp_obj.route('/processreaction1', methods=['POST'])
+@login_required
 def processreaction1():
     sender = request.form['sender']
     message = request.form['message']
@@ -111,6 +122,7 @@ def processreaction1():
 # When user presses a 'reaction' button on a message from /send, this route will process the reaction 
 # and send the reaction as a message to the other user. Send thumbs down emoji.
 @myapp_obj.route('/processreaction2', methods=['POST'])
+@login_required
 def processreaction2():
     sender = request.form['sender']
     message = request.form['message']
@@ -123,6 +135,10 @@ def processreaction2():
         receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎")                            
         return redirect('/send')
 
+@myapp_obj.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 
