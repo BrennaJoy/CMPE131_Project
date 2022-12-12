@@ -7,6 +7,13 @@ from users import add_new_user, search_for_user, remove_user
 from flask import render_template, redirect, flash, request, url_for
 from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage, DeleteConfirm
 import datetime 
+from werkzeug.utils import secure_filename
+import os
+
+# folders for our uploadable images
+UPLOAD_FOLDER = os.path.join( os.getcwd(), 'app/static')
+myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+myapp_obj._static_folder = UPLOAD_FOLDER
 
 @myapp_obj.route('/')
 def home():
@@ -40,8 +47,8 @@ def signUp():
 			current_form.email.data)
 		#Remove print statement later. For debugging purposes
 		if add_new_user(current_form.name.data, current_form.username.data, current_form.password.data, current_form.email.data):
-			flash('Welcome!')
-		return redirect('/login')
+			flash('Welcome to Twitcher!')
+		return redirect('/homepage')
 	if current_form.username.data == "" or current_form.password.data == "" or current_form.name.data == "" or current_form.email.data == "":
 		flash('Please Enter All Criteria')
 	return render_template('signup.html', form=current_form)
@@ -71,6 +78,7 @@ def homepage():
 @login_required
 def send():
     # SendMessage form
+    print("using send message")
     current_form = SendMessage()
     user_messages = []
     # Check if the user exists and send the user's messages list to the template to display it.
@@ -85,8 +93,18 @@ def send():
             receiver_user = search_for_user(current_form.receiver.data)
             time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
             # Sender name 'JohnDoe' is temporary, will replace with sender username.
-            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data)          
-            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data) 
+            # deal with sending photos
+            print(request.files)
+            if 'file' in request.files:
+                file = request.files['file']
+                sec_filename = secure_filename(file.filename)
+                full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename)
+                file.save(full_filename)
+                print(full_filename)
+            else:
+                sec_filename = None
+            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data, sec_filename)          
+            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
     return render_template('send.html', form=current_form, msg=user_messages)
 
 # Account deletion confirmation page, delete user from database if they submit the form.
@@ -115,7 +133,7 @@ def processreaction1():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👍")                            
+        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👍", None)                            
         return redirect('/send')
 
 
@@ -132,7 +150,7 @@ def processreaction2():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎")                            
+        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎", None)                            
         return redirect('/send')
 
 @myapp_obj.route('/logout')
