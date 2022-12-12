@@ -88,7 +88,9 @@ def send():
                 sec_filename = secure_filename(file.filename)
                 file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
                 print(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
-            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data)          
+            else:
+                sec_filename = None
+            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data, sec_filename)          
             flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
     return render_template('send.html', form=current_form, msg=user_messages)
 
@@ -117,7 +119,7 @@ def processreaction1():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👍")                            
+        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👍", None)                            
         return redirect('/send')
 
 
@@ -133,7 +135,7 @@ def processreaction2():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎")                            
+        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎", None)                            
         return redirect('/send')
 
 
