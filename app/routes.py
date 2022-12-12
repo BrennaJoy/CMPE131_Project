@@ -92,24 +92,6 @@ def send():
             flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
     return render_template('send.html', form=current_form, msg=user_messages)
 
-@myapp_obj.route('/send', methods=['POST', 'GET'])
-def send_photo():
-	if request.method == 'POST':
-		# see if they didn't put in a file
-		print("clicked file")
-		if 'file' not in request.files:
-			print("had no file")
-			return redirect('send.html')
-		file = request.files['file']
-		# check to see we really had a file name
-		if file.filename == "":
-			print("Had no file name")
-			return redirect('send.html')
-		sec_filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		return render_template('send.html', form=current_form, name=file)
-
 # Account deletion confirmation page, delete user from database if they submit the form.
 @myapp_obj.route('/deleteconfirm', methods=['POST', 'GET'])
 def deleteconfirm():
