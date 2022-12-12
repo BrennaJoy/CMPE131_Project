@@ -8,7 +8,7 @@ import datetime
 from werkzeug.utils import secure_filename
 import os
 
-UPLOAD_FOLDER = '/home/brennajoy' # TODO: change this later
+UPLOAD_FOLDER = os.path.join( os.getcwd(), 'images')
 myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
@@ -81,15 +81,15 @@ def send():
             receiver_user = search_for_user(current_form.receiver.data)
             time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
             # Sender name 'JohnDoe' is temporary, will replace with sender username.
-            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data)          
-            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
-	    # deal with sending photos
+            # deal with sending photos
             print(request.files)
             if 'file' in request.files:
                 file = request.files['file']
                 sec_filename = secure_filename(file.filename)
                 file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
                 print(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
+            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data)          
+            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
     return render_template('send.html', form=current_form, msg=user_messages)
 
 @myapp_obj.route('/send', methods=['POST', 'GET'])
