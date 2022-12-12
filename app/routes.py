@@ -9,11 +9,7 @@ from werkzeug.utils import secure_filename
 import os
 
 # folders for our uploadable images
-UPLOAD_FOLDER = os.path.join( os.getcwd(), 'static')
-try:
-    os.mkdir(UPLOAD_FOLDER)
-except:
-    pass # the folder already exists
+UPLOAD_FOLDER = os.path.join( os.getcwd(), 'app/static')
 myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 myapp_obj._static_folder = UPLOAD_FOLDER
 
