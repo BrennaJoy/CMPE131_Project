@@ -39,10 +39,13 @@ def create_tables():
 def load_user(id):
     return Users.query.get(id)
 
-
 def add_usr(usr):
     u = Users(usr.username, usr.password, usr.email)
     db.session.add(u)
+    db.session.commit()
+
+def remove_usr(usr):
+    db.session.delete(usr)
     db.session.commit()
 
 

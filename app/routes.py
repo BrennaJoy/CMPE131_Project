@@ -87,12 +87,13 @@ def send():
 
 # Account deletion confirmation page, delete user from database if they submit the form.
 @myapp_obj.route('/deleteconfirm', methods=['POST', 'GET'])
+@login_required
 def deleteconfirm():
     current_form = DeleteConfirm()
     # Remove user from database if confirm button is clicked.
     if current_form.validate_on_submit():
-        name = current_form.username.data
-        # JohnDoe is temporary, will replace with a way to get the currently logged in user.
+        name = current_user.username
+        logout_user()
         remove_user(name)
         # Redirect to homepage after account deletion.
         return redirect("/")

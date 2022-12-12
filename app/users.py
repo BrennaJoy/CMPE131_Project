@@ -1,5 +1,5 @@
 from flask import Flask, flash
-from app.models import Users, add_usr
+from app.models import Users, add_usr, remove_usr
 import hashlib
 
 user_dictionary = {}
@@ -39,10 +39,10 @@ def search_for_user(usr):
 
 def remove_user(username):
 	# Check if user exists in database before removing them from it.
-	# Will also need to check if they are currently logged in.
-	if (user_dictionary.get(username) != None):
-		name = user_dictionary.get(username).username
-		user_dictionary.pop(username)
+	if (search_for_user(username) != None):
+		user = search_for_user(username)
+		name = user.username
+		remove_usr(user)
 		print(name + ' has been deleted.')
 	else:
 		flash('User does not exist.')
