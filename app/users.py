@@ -1,6 +1,5 @@
 from flask import Flask, flash
 from app.models import Users, add_usr, remove_usr
-import hashlib
 
 user_dictionary = {}
 
@@ -13,8 +12,11 @@ class User:
 		self.username = username
 		self.email = email
 		self.password = password
-		# Make sure that login page uses hashlib.md5(password.encode()) to
-		# hash the passwords. Will compare to the same hash.
+
+	# Append a tuple containing (name of sender, message they send) to this user's messages list.
+	def add_message(self, timestamp, sender, message, image):
+		self.messages.append((timestamp, sender, message, image))
+
 
 def add_new_user(name, usrn, password, email):
 	user_object = Users.query.filter_by(username = usrn).first()
