@@ -1,66 +1,57 @@
-{% extends "base.html" %}
-
-{% block mycontent %}
-
-<head>
-<title>Send a message to the user</title>
-<h1><b>Send message: </b></h1>
-</head>
-
-<form action="" method="POST" novalidate>
-    {{form.hidden_tag()}}
-    <p>{{form.receiver.label}} <br> {{form.receiver()}}</p>
-    <p>{{form.message.label}} <br> {{form.message()}}</p>
-    <p>{{form.submit.label}} <br> {{form.submit()}}</p>
-</form>
-
-<div class = "messagetitle">
-<head>
-    <title>View Messages</title>
-    <h1><b>Your messages: </b></h1>
-</head>
-</div>
-
-<div class = "box">
-<body>
-    {% for m in msg %}
-        <b>{{ m[0]}}
-        {{ m[1] }} </b>
-        {{ m[2] }}
-        <form action="{{ url_for('processreaction1', sender=m[1], message=m[2]) }}" method="POST">
-        <input type="hidden" name="sender" value="{{ m[1] }}" />
-        <input type="hidden" name="message" value="{{ m[2] }}" />
-        <input type="submit" value="👍"/>
-        </form>
-        <form action="{{ url_for('processreaction2', sender=m[1], message=m[2]) }}" method="POST">
-        <input type="hidden" name="sender" value="{{ m[1] }}" />
-        <input type="hidden" name="message" value="{{ m[2] }}" />
-        <input type="submit" value="👎"/>
-        </form>
-        <br></br>
-    {% endfor %}
-</body>
-</div>
-
 <style>
-.box {
-  display: inline-block;
-  width: 500px;
-  height: 750px;
-  background-color: mediumpurple;
-  position: fixed;
-  left: 500px;
-  top: 100px;
-  overflow:  scroll;
-}
-
-.messagetitle {
-  position: fixed;
-  left: 500px;
-  top: 0px;
-}
-
-</style>
-
-
-{% endblock %}
+    .box {
+      display: inline-block;
+      width: 500px;
+      height: 750px;
+      background-color: rgb(201, 184, 236);
+      position: left;
+      left: 500px;
+      top: 100px;
+      overflow:  scroll;
+    }
+    
+    .messagetitle {
+      position: fixed;
+      left: 500px;
+      top: 0px;
+    }
+    </style>
+    
+  {% extends "base.html" %}
+  
+  {% block mycontent %}
+  <br></br>
+  <head>
+  <title>Send a message to the user</title>
+  <h1><b>Send message: </b></h1>
+  </head>
+  
+  <form action="" method="POST" novalidate>
+      {{form.hidden_tag()}}
+      <p>{{form.receiver.label}} <br> {{form.receiver()}}</p>
+      <p>{{form.message.label}} <br> {{form.message()}}</p>
+      <p>{{form.submit.label}} <br> {{form.submit()}}</p>
+  </form>
+  
+  <div class = "box">
+  <body>
+      {% for m in msg %}
+          <b>{{ m[0]}}
+          {{ m[1] }} </b>
+          {{ m[2] }}
+          <form action="{{ url_for('processreaction1', sender=m[1], message=m[2]) }}" method="POST">
+          <input type="hidden" name="sender" value="{{ m[1] }}" />
+          <input type="hidden" name="message" value="{{ m[2] }}" />
+          <input type="submit" value="👍"/>
+          </form>
+          <form action="{{ url_for('processreaction2', sender=m[1], message=m[2]) }}" method="POST">
+          <input type="hidden" name="sender" value="{{ m[1] }}" />
+          <input type="hidden" name="message" value="{{ m[2] }}" />
+          <input type="submit" value="👎"/>
+          </form>
+          <br></br>
+      {% endfor %}
+  </body>
+  </div>
+  {% endblock %}
+  

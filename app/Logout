@@ -1,0 +1,7 @@
+@myapp_obj.route('/logout')
+def logout():
+	session.pop('email', None)
+	return redirect('/')
+
+if __name__ == "__main__":
+    app.run()
