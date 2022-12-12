@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block mycontent %}
+<br>
 <h1>Search For Users!</h1>
 <p> Please Enter Username into Search Bar </p>
-
+</br>
 <form action="" method="POST" novalidate>
     {{form.hidden_tag()}}
     <p>{{form.username.label}} <br> {{form.username()}}</p>
