@@ -5,6 +5,11 @@ from users import add_new_user, search_for_user, remove_user
 from flask import render_template, redirect, flash, request
 from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage, DeleteConfirm
 import datetime 
+from werkzeug.utils import secure_filename
+import os
+
+UPLOAD_FOLDER = '/home/brennajoy' # TODO: change this later
+myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
 def login():
@@ -30,7 +35,7 @@ def signUp():
 		#Remove print statement later. For debugging purposes
 		if add_new_user(current_form.name.data, current_form.username.data, current_form.password.data, current_form.email.data):
 			flash('Welcome to Twitcher!')
-		return redirect('/')
+		return redirect('/homepage')
 	if current_form.username.data == "" or current_form.password.data == "" or current_form.name.data == "" or current_form.email.data == "":
 		flash('Please Enter All Criteria')
 	return render_template('signup.html', form=current_form)
@@ -61,6 +66,7 @@ def homepage():
 @myapp_obj.route('/send', methods=['POST', 'GET'])
 def send():
     # SendMessage form
+    print("using send message")
     current_form = SendMessage()
     user_messages = []
     # Check if the user exists and send the user's messages list to the template to display it.
@@ -76,8 +82,33 @@ def send():
             time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
             # Sender name 'JohnDoe' is temporary, will replace with sender username.
             receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data)          
-            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data) 
+            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
+	    # deal with sending photos
+            print(request.files)
+            if 'file' in request.files:
+                file = request.files['file']
+                sec_filename = secure_filename(file.filename)
+                file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
+                print(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
     return render_template('send.html', form=current_form, msg=user_messages)
+
+@myapp_obj.route('/send', methods=['POST', 'GET'])
+def send_photo():
+	if request.method == 'POST':
+		# see if they didn't put in a file
+		print("clicked file")
+		if 'file' not in request.files:
+			print("had no file")
+			return redirect('send.html')
+		file = request.files['file']
+		# check to see we really had a file name
+		if file.filename == "":
+			print("Had no file name")
+			return redirect('send.html')
+		sec_filename = secure_filename(file.filename)
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		return render_template('send.html', form=current_form, name=file)
 
 # Account deletion confirmation page, delete user from database if they submit the form.
 @myapp_obj.route('/deleteconfirm', methods=['POST', 'GET'])
