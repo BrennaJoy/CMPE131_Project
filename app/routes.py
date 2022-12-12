@@ -8,8 +8,14 @@ import datetime
 from werkzeug.utils import secure_filename
 import os
 
-UPLOAD_FOLDER = os.path.join( os.getcwd(), 'images')
+# folders for our uploadable images
+UPLOAD_FOLDER = os.path.join( os.getcwd(), 'static')
+try:
+    os.mkdir(UPLOAD_FOLDER)
+except:
+    pass # the folder already exists
 myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+myapp_obj._static_folder = UPLOAD_FOLDER
 
 @myapp_obj.route('/login', methods=['POST', 'GET'])
 def login():
@@ -86,8 +92,9 @@ def send():
             if 'file' in request.files:
                 file = request.files['file']
                 sec_filename = secure_filename(file.filename)
-                file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
-                print(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename))
+                full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename)
+                file.save(full_filename)
+                print(full_filename)
             else:
                 sec_filename = None
             receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data, sec_filename)          
