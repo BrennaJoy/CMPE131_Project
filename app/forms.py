@@ -25,5 +25,4 @@ class SendMessage(FlaskForm):
     submit = SubmitField('Send')
 
 class DeleteConfirm(FlaskForm):
-    username = StringField('Username:', validators = [DataRequired()])
     submit = SubmitField('Confirm')
