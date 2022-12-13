@@ -40,7 +40,9 @@
         <b>{{ m[0]}}
         {{ m[1] }} </b>
         {{ m[2] }}
-        <img src="{{url_for('static', filename=m[3])}}">
+        {% if m[3] != None %}
+            <img src="{{url_for('static', filename=m[3])}}">
+        {% endif %}
         <form action="{{ url_for('processreaction1', sender=m[1], message=m[2]) }}" method="POST">
         <input type="hidden" name="sender" value="{{ m[1] }}" />
         <input type="hidden" name="message" value="{{ m[2] }}" />

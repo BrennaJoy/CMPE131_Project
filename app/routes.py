@@ -95,8 +95,6 @@ def send():
                 file = request.files['file']
                 sec_filename = secure_filename(file.filename)
                 full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename)
-                file.save(full_filename)
-                print(full_filename)
             else:
                 sec_filename = None
                 
