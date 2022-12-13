@@ -162,6 +162,6 @@ def user(username):
     posts = [
         {'author': user, 'body': ''},
     ]
-    return render_template('userprofile.html', user=user, posts=posts)
+    return render_template('Userprofile.html', user=user, posts=posts)
 
 
