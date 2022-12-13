@@ -27,3 +27,10 @@ class SendMessage(FlaskForm):
 class DeleteConfirm(FlaskForm):
     username = StringField('Username:', validators = [DataRequired()])
     submit = SubmitField('Confirm')
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators = [DataRequired()])
+    content = TextAreaField('Content', validators = [DataRequired()])
+    author = StringField('Author', validators = [DataRequired()])
+    submit = SubmitField('Submit:')
+
