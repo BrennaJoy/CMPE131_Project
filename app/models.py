@@ -18,9 +18,9 @@ class Users(db.Model, UserMixin):
         self.password = password 
         self.email = email
 
-    # Append a tuple containing (name of sender, message they send) to this user's messages list.
-    def add_message(self, timestamp, sender, message):
-        self.messages.append((timestamp, sender, message))
+        # Append a tuple containing (name of sender, message they send) to this user's messages list.
+    def add_message(self, timestamp, sender, message, image):
+        self.messages.append((timestamp, sender, message, image))
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

@@ -13,11 +13,6 @@ class User:
 		self.email = email
 		self.password = password
 
-	# Append a tuple containing (name of sender, message they send) to this user's messages list.
-	def add_message(self, timestamp, sender, message, image):
-		self.messages.append((timestamp, sender, message, image))
-
-
 def add_new_user(name, usrn, password, email):
 	user_object = Users.query.filter_by(username = usrn).first()
 	if user_object is None:
