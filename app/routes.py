@@ -102,7 +102,6 @@ def send():
                 
             receiver_user.add_message(' ' + time, current_user.username, ': ' + current_form.message.data, sec_filename)          
             flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)       
-            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)
     return render_template('send.html', form=current_form, msg=user_messages)
 
 # Account deletion confirmation page, delete user from database if they submit the form.
@@ -132,7 +131,7 @@ def processreaction1():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👍", None)                            
+        receiver_user.add_message(' ' + time, current_user.username, ": (\"" + message + "\") " + "👍", None)                            
         return redirect('/send')
 
 
@@ -149,7 +148,7 @@ def processreaction2():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎", None)                            
+        receiver_user.add_message(' ' + time, current_user.username, ": (\"" + message + "\") " + "👎", None)                            
         return redirect('/send')
 
 @myapp_obj.route('/logout')
