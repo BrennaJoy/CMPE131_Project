@@ -140,6 +140,32 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+#adding post or short message to homepage 
+@myapp_obj.route('/add-post', methods=['POST', 'GET'])
+@login_required
+def add_post():
+    current_form = PostForm()
+    if current_form.validate_on_submit():
+        post = Posts(title=current_form.title.data, content=current_form.content.data, author=current_form.author.data)
+        #clear the form
+        current_form.title.data = ''
+        current_form.content.data = ''
+        current_form.author.data = ''
+
+        db.session.add(post)
+        db.session.commit()
+        flash("Blog Post Submitted Successfully!")
+    return render_template("add_post.html", form=current_form)
+
+#posts page that users add in 'add post' page
+@myapp_obj.route('/posts')
+@login_required
+def posts():
+    #grab posts from data
+    posts = Posts.query.order_by(Posts.date_posted)
+    return render_template('posts.html', posts=posts)
+    
+
 
 
 
