@@ -51,25 +51,21 @@ The system shows the message on the homepage
 Pre condition: the user must have an account and logged in
 
 Triggers:
-The user click on the profile box and click edit
-The user will go to settings and find edit profile
+The user click on edit profile
 
 Primary sequence:
-The user click on the edit profile picture
-The user change the profile picture or delete the profile picture
-The user click “finish edit”
-The user click on the edit bio
-The user types text on bio
+The user click on the edit profile
+The user change the profile or delete the
 The user click “finish edit”
 The system will show the edited profile picture and bio
 
-Primary postconditions: the user can update the profile picture and/or bio
+Primary postconditions: the user can update the bio
 
-Alternate sequence: the picture size is too big
+Alternate sequence: the words on bio is too long
 The user click on the edit profile picture
 The user change the profile picture
-The system will show a warning message “the image size is bigger than 10 MB”
-The user select another picture
+The system will show a warning message “the bio is longer than 140 characters”
+The user type another bio
 
 3. Use Case Name: Search for User
 

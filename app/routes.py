@@ -1,12 +1,19 @@
-from flask_login import login_user, logout_user, user_logged_in, login_required
+from flask_login import login_user, logout_user, user_logged_in, login_required, current_user
 from app import myapp_obj
 import sys
-from app.models import User
+from app.models import Users
 sys.path.append('app')
 from users import add_new_user, search_for_user, remove_user
 from flask import render_template, redirect, flash, request, url_for
 from app.forms import LoginForm, CreateUserForm, SearchForm, SendMessage, DeleteConfirm
 import datetime 
+from werkzeug.utils import secure_filename
+import os
+
+# folders for our uploadable images
+UPLOAD_FOLDER = os.path.join( os.getcwd(), 'app/static')
+myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+myapp_obj._static_folder = UPLOAD_FOLDER
 
 @myapp_obj.route('/')
 def home():
@@ -18,10 +25,10 @@ def login():
     # taking input from the user and doing somithing with it
     if current_form.validate_on_submit():
         # search to make sure we have the user in our database
-        user = User.query.filter_by(username=current_form.username.data).first()
+        user = Users.query.filter_by(username=current_form.username.data).first()
 
         # check user's password with what is saved on the database
-        if user is None or not user.check_password(current_form.password.data):
+        if user is None or user.password != current_form.password.data:
             flash('Invalid password!')
             # if passwords don't match, send user to login again
             return redirect('/login')
@@ -40,8 +47,8 @@ def signUp():
 			current_form.email.data)
 		#Remove print statement later. For debugging purposes
 		if add_new_user(current_form.name.data, current_form.username.data, current_form.password.data, current_form.email.data):
-			flash('Welcome!')
-		return redirect('/login')
+			flash('Welcome to Twitcher!')
+		return redirect('/homepage')
 	if current_form.username.data == "" or current_form.password.data == "" or current_form.name.data == "" or current_form.email.data == "":
 		flash('Please Enter All Criteria')
 	return render_template('signup.html', form=current_form)
@@ -64,18 +71,16 @@ def homepage():
 
 # Private messaging form, allows user to send message to another user. This page also displays any messages 
 # that this current user has received. 
-# IMPORTANT: As of now, there is no way to verify current logged in user, so the only way to view sent messages
-# is to send messages to 'JohnDoe', this also means that an account with the username 'JohnDoe' has to be created 
-# and added to the database first. 
 @myapp_obj.route('/send', methods=['POST', 'GET'])
 @login_required
 def send():
     # SendMessage form
+    print("using send message")
     current_form = SendMessage()
     user_messages = []
     # Check if the user exists and send the user's messages list to the template to display it.
-    if (search_for_user("JohnDoe") != None):
-        user_messages = search_for_user("JohnDoe").messages # JohnDoe is temporary.
+    if (search_for_user(current_user.username) != None):
+        user_messages = search_for_user(current_user.username).messages 
     # On form submission, check if the receiever user exist, otherwise prompt the sender to enter the correct username.
     if current_form.validate_on_submit():
         if (search_for_user(current_form.receiver.data) == None):
@@ -84,19 +89,32 @@ def send():
         else:
             receiver_user = search_for_user(current_form.receiver.data)
             time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
-            # Sender name 'JohnDoe' is temporary, will replace with sender username.
-            receiver_user.add_message(' ' + time, 'JohnDoe', ': ' + current_form.message.data)          
-            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data) 
+            # deal with sending photos
+            print(request.files)
+            if 'file' in request.files and request.files['file']:
+                file = request.files['file']
+                sec_filename = secure_filename(file.filename)
+                if sec_filename != '':
+                    full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename)
+                else:
+                    full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], 'default.png')
+                file.save(full_filename)
+            else:
+                sec_filename = 'default.png'
+                
+            receiver_user.add_message(' ' + time, current_user.username, ': ' + current_form.message.data, sec_filename)          
+            flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)       
     return render_template('send.html', form=current_form, msg=user_messages)
 
 # Account deletion confirmation page, delete user from database if they submit the form.
 @myapp_obj.route('/deleteconfirm', methods=['POST', 'GET'])
+@login_required
 def deleteconfirm():
     current_form = DeleteConfirm()
     # Remove user from database if confirm button is clicked.
     if current_form.validate_on_submit():
-        name = current_form.username.data
-        # JohnDoe is temporary, will replace with a way to get the currently logged in user.
+        name = current_user.username
+        logout_user()
         remove_user(name)
         # Redirect to homepage after account deletion.
         return redirect("/")
@@ -115,7 +133,7 @@ def processreaction1():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👍")                            
+        receiver_user.add_message(' ' + time, current_user.username, ": (\"" + message + "\") " + "👍", None)                            
         return redirect('/send')
 
 
@@ -132,13 +150,14 @@ def processreaction2():
     else:
         time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
         receiver_user = search_for_user(sender)
-        receiver_user.add_message(' ' + time, 'Test React', ": (\"" + message + "\") " + "👎")                            
+        receiver_user.add_message(' ' + time, current_user.username, ": (\"" + message + "\") " + "👎", None)                            
         return redirect('/send')
 
 @myapp_obj.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
 
 #adding post or short message to homepage 
 @myapp_obj.route('/add-post', methods=['POST', 'GET'])
@@ -166,6 +185,29 @@ def posts():
     return render_template('posts.html', posts=posts)
     
 
+## User prfoile page
+@myapp_obj.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': ''},
+    ]
+    return render_template('Userprofile.html', user=user, posts=posts)
 
-
-
+## Edit profile
+@myapp_obj.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('edit_profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html', title='Edit Profile',
+                           form=form)

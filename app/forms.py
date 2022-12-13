@@ -25,7 +25,6 @@ class SendMessage(FlaskForm):
     submit = SubmitField('Send')
 
 class DeleteConfirm(FlaskForm):
-    username = StringField('Username:', validators = [DataRequired()])
     submit = SubmitField('Confirm')
 
 class PostForm(FlaskForm):
@@ -33,4 +32,9 @@ class PostForm(FlaskForm):
     content = TextAreaField('Content', validators = [DataRequired()])
     author = StringField('Author', validators = [DataRequired()])
     submit = SubmitField('Submit:')
+
+class EditProfileForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    submit = SubmitField('Submit')
 
