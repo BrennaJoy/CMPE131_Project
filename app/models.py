@@ -49,3 +49,12 @@ def remove_usr(usr):
     db.session.commit()
 
 
+#creating class post that user can post short message on homepage
+class Posts(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    content = db.Column(db.Text)
+    author = db.Column(db.String(255))
+    date_posted = db.Column(db.DateTime)
+
+

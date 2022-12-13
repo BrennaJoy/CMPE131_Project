@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block mycontent %}
+<br>
+<h1>Add Blog Post...</h1>
+</br>
+<form action="" method="POST" novalidate>
+    {{form.hidden_tag()}}
+    <p>{{form.title.label}} <br> {{form.title()}}</p>
+    <p>{{form.author.label}} <br> {{form.author()}}</p>
+    <p>{{form.content.label}} <br> {{form.content()}}</p>
+    <p>{{form.submit()}}</p>
+</form>
+
+
+
+{% endblock %}
