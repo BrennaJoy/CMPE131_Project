@@ -91,12 +91,16 @@ def send():
             time = datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] ")
             # deal with sending photos
             print(request.files)
-            if 'file' in request.files:
+            if 'file' in request.files and request.files['file']:
                 file = request.files['file']
                 sec_filename = secure_filename(file.filename)
-                full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename)
+                if sec_filename != '':
+                    full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], sec_filename)
+                else:
+                    full_filename = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], 'default.png')
+                file.save(full_filename)
             else:
-                sec_filename = None
+                sec_filename = 'default.png'
                 
             receiver_user.add_message(' ' + time, current_user.username, ': ' + current_form.message.data, sec_filename)          
             flash('Sent: ' + current_form.message.data + ' to ' + current_form.receiver.data)       
