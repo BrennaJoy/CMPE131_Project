@@ -2,7 +2,7 @@
 @login_required
 def post():
     error = ''
-    current_form = PostForm()
+    current_form = postmssgform()
     if current_form.validate_on_submit():
         if len(current_form.text.data) >250:
             error = 'Post is too long! (max characters is 250)'
