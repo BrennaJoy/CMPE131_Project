@@ -184,6 +184,42 @@ def posts():
     posts = Posts.query.order_by(Posts.date_posted)
     return render_template('posts.html', posts=posts)
     
+@myapp_obj.route('/posts/edit/<int:id>', methods=['POST', 'GET'])
+@login_required
+def edit_post(id):
+    post = Posts.query.get_or_404(id)
+    current_form = PostForm()
+    if current_form.validate_on_submit():
+        post.title = current_form.title.data
+        post.author = current_form.author.data
+        post.content = current_form.content.data
+        #update database
+        db.session.add(post)
+        db.session.commit()
+        flash("Post has been updated!")
+        return redirect(url_for('posts', id=post.id))
+    current_form.title.data = post.title
+    current_form.author.data = post.author
+    current_form.content.data = post.content
+    return render_template('edit_post.html', form=current_form)
+
+@myapp_obj.route('/posts/delete/<int:id>')
+@login_required
+def delete_post(id):
+    post_to_delete = Posts.query.get_or_404(id)
+    try:
+        db.session.delete(post_to_delete)
+        db.session.commit()
+        #return a message
+        flash("Blog Post was deleted successfully!")
+        #grab posts from data
+        posts = Posts.query.order_by(Posts.date_posted)
+        return render_template('posts.html', posts=posts)
+    except:
+        #return error message
+        flash("There was a problem deleting blog post! Try again...")
+        posts = Posts.query.order_by(Posts.date_posted)
+        return render_template('posts.html', posts=posts)
 
 ## User prfoile page
 @myapp_obj.route('/user/<username>')
